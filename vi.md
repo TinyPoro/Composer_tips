@@ -10,7 +10,7 @@ Quản điểm chung của hầu hết các lời khuyên là "Thực hiện 1 c
 Tôi nói thật đấy. Tài liệu rất tuyệt và việc bỏ ra vài giờ đồng hồ ngồi đọc nó sẽ giúp bạn tiết kiệm thời gian về lâu về dai. Bạn sẽ ngạc nhiên vì có quá nhiều thứ Composer có thể làm.
 
 ### Lời khuyên #2: Cẩn thận sự khác nhau giữa 1 "project" và 1 "library".
-Điều này rất quan trọng, để biết khi nào bạn cần biết  phải tại 1 "project" hay 1 "library". Mỗi loại sẽ yêu cầu những  bài thực hành riêng biệt.
+Điều này rất quan trọng, để biết khi nào bạn cần biết phải tạo 1 "project" hay 1 "library". Mỗi loại sẽ yêu cầu những bài thực hành riêng biệt.
 
 1 thư viện là 1 package có thể tái sử dụng, bạn nên thêm nó như là 1 dependency(phụ thuộc) - như là symfony/symfony, doctrine/orm hay elasticsearch/elasticsearch.
 
@@ -18,7 +18,7 @@ Tôi nói thật đấy. Tài liệu rất tuyệt và việc bỏ ra vài giờ
 
 Tôi sẽ phân biệt giữa thư viện và 1 project trong các lời khuyên bên dưới
 
-### Lời khuyên #3: Sử dụng các phiên bản phụ thuộc cụ thể cho các ứng dụng.
+### Lời khuyên #3: Sử dụng các phiên bản dependency cụ thể cho các ứng dụng.
 
 Nếu bạn đang tạo 1 ứng dụng, bạn nên sử dụng  các phiên bản cụ thể nhất để định nghĩa các phụ thuộc. Nếu bạn cần  phân tích các fie YAML, bạn nên đặc tả phụ thuộc như thế này "symfony/yaml": "4.0.2".
 
@@ -52,7 +52,7 @@ Vậy tốt nhất là để composer.lock vào trong .gitignore để bạn kh�
 
 Nếu bạn muốn chắc chắn rằng thư viện tương thích với các phiên bản khác nhau của các phụ thuộc, đọc lời khuyên tiếp theo.
 
-### Lời khuyên 7 #7: Chạy các kiến trúc Travis CI với nhiều phiên bản phụ thuộc
+### Lời khuyên 7 #7: Chạy các kiến trúc Travis CI với nhiều phiên bản dependency
 Lời khuyên này chỉ áp dụng cho các thư viện mà thôi ( bởi vì bạn sử dụng các phiên bản cụ thể cho các ứng dụng)
 
 Nếu bạn đang xây dựng 1 thư viện mã nguồn mở, bạn chắc hẳn đang sử dụng Travis CI để chạy kiến trúc của nó.
@@ -103,7 +103,7 @@ Lần sau, bạn require 1 package mới, nó sẽ được thêm vào  chỗ th
 ### Lời khuyên #9: Đừng thử gộp composer.lock khi rebase hay merge 
 Nếu bạn muốn thêm 1 phụ thuộc mới vào composer.json(và composer.lock) và trước khi  nhánh của bạn được gộp, có 1 phụ thuộc khác được thêm ở master, bạn cần rebase nhánh của bạn. Và bạn sẽ gặp 1 merge-conflict trong composer.lock.
 
-Bạn đừng nên bảo giờ thử giải quyết  xung đột này thủ công, vì file composer.lock chứa ã băm của các phụ thuộc định nghĩa trong composer.json. Vì vậy ngay cả khi bạn giải quyết được xung đột, kết quả file lock vẫn sẽ bị sai.
+Bạn đừng nên bảo giờ thử giải quyết  xung đột này thủ công, vì file composer.lock chứa hàm băm của các dependency định nghĩa trong composer.json. Vì vậy ngay cả khi bạn giải quyết được xung đột, kết quả file lock vẫn sẽ bị sai.
 
 Điều tốt nhất có thể làm ở đây là tạo .gitattributes ở project root với dòng sau, để thể hiện rằng git sẽ không bao giờ gộp composer.lock:
 /composer.lock -merge
@@ -215,7 +215,7 @@ Sau đó sử dụng package mà bình thường bạn sẽ có:
 ```
 ### Lời khuyên #17: Làm sao để tạm thời sử dụng 1 nhánh với bugfix từ fork
 
-Nếu bạn tìm thấy 1 bug trong 1 thư viện piblic và bạn sửa nó trong fork của bạn trên Github, bạn cần phải cài thư viện từ repo này thay vì  cái chính thức( cho tới khi bugfix được gộp vào và phiên bản sửa lỗi được phát hành).
+Nếu bạn tìm thấy 1 bug trong 1 thư viện public và bạn sửa nó trong fork của bạn trên Github, bạn cần phải cài thư viện từ repo này thay vì  cái chính thức( cho tới khi bugfix được gộp vào và phiên bản sửa lỗi được phát hành).
 
 Điều này có thể được thực hiện dễ dàng bằng 1 aliasing cùng dòng:
 {
