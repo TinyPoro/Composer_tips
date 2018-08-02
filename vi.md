@@ -4,13 +4,13 @@
 
 Hầu hết lập trình viên PHP biết cách sử dụng Composer, thế nhưng không phải tất cả chúng ta đều sử dụng chúng 1 cách hiệu quả hoặc theo những cách tốt nhất có thể. Vì vậy tôi quyết định tổng hợp những thứ mà tôi nghĩ quan trọng trong quy trình làm việc hàng ngày của tôi.
 
-Quản điểm chung của hầu hết các lời khuyên là "Thực hiện 1 cách an toàn", điều đó có nghĩa là nếu có nhiều cách để giải quyết 1 việc gì đó, tôi sẽ tiếp cận bằng cách ít khả năng lỗi nhất.
+Quan điểm chung của hầu hết các lời khuyên là "Thực hiện 1 cách an toàn", điều đó có nghĩa là nếu có nhiều cách để giải quyết 1 việc gì đó, tôi sẽ tiếp cận bằng cách ít khả năng lỗi nhất.
 
 ### Lời khuyên #1: Đọc tài liệu
-Tôi nói thật đấy. Tài liệu rất tuyệt và việc bỏ ra vài giờ đồng hồ ngồi đọc nó sẽ giúp bạn tiết kiệm thời gian về lâu về dai. Bạn sẽ ngạc nhiên vì có quá nhiều thứ Composer có thể làm.
+Tôi nói thật đấy. Tài liệu rất tuyệt và việc bỏ ra vài giờ đồng hồ ngồi đọc nó sẽ giúp bạn tiết kiệm thời gian về lâu về dài. Bạn sẽ ngạc nhiên vì có quá nhiều thứ Composer có thể làm.
 
 ### Lời khuyên #2: Cẩn thận sự khác nhau giữa 1 "project" và 1 "library".
-Điều này rất quan trọng, để biết khi nào bạn cần biết  phải tại 1 "project" hay 1 "library". Mỗi loại sẽ yêu cầu những  bài thực hành riêng biệt.
+Điều này rất quan trọng, để biết khi nào bạn cần biết  phải tạo 1 "project" hay 1 "library". Mỗi loại sẽ yêu cầu những  bài thực hành riêng biệt.
 
 1 thư viện là 1 package có thể tái sử dụng, bạn nên thêm nó như là 1 dependency(phụ thuộc) - như là symfony/symfony, doctrine/orm hay elasticsearch/elasticsearch.
 
@@ -22,9 +22,9 @@ Tôi sẽ phân biệt giữa thư viện và 1 project trong các lời khuyên
 
 Nếu bạn đang tạo 1 ứng dụng, bạn nên sử dụng  các phiên bản cụ thể nhất để định nghĩa các phụ thuộc. Nếu bạn cần  phân tích các fie YAML, bạn nên đặc tả phụ thuộc như thế này "symfony/yaml": "4.0.2".
 
-Thậm chí nếu thư viện tuân theo Semantic Versioning, có thể có  sự phá vỡ tbackwards-compatibility giữa các phiên bản nhỏ  và phiên bản vá. Ví dụ, nếu bạn đang sử dụng "symfony/symfony": "^3.1", có thể có sự khác biệt trong bản 3.2 có thể làm hỏng các test ứng dụng của bạn. Hay cũng có thể có các sửa lỗi trong PHP_CodeSniffer và nó sẽ phát hiện các vấn đề định dạng mới trong code của bạn, và 1 lần nữa nó có thể dẫn tới cấu trúc code hỏng.
+Thậm chí nếu thư viện tuân theo Semantic Versioning, có thể có  sự phá vỡ backwards-compatibility giữa các phiên bản nhỏ  và phiên bản vá. Ví dụ, nếu bạn đang sử dụng "symfony/symfony": "^3.1", có thể có sự khác biệt trong bản 3.2 có thể làm hỏng các test ứng dụng của bạn. Hay cũng có thể có các sửa lỗi trong PHP_CodeSniffer và nó sẽ phát hiện các vấn đề định dạng mới trong code của bạn, và 1 lần nữa nó có thể dẫn tới cấu trúc code hỏng.
 
-Việc cập nhật các phụ thuộc cũng phải thật thận trọng,  không thể tùy tiện được. 1 trong những lời khuyên bên dưới sẽ thảo luận về điều này chi tiết hơn.
+Việc cập nhật các phụ thuộc cũng phải thật thận trọng,  không thể tùy tiện được. Một trong những lời khuyên dưới đây sẽ là rõ vấn đề này hơn.
 
 Nghe có vẻ hơi quá 1 tí, nhưng điều này sẽ ngăn việc các đồng nghiệp của bạn đột ngột cập nhật tất cả các phụ thuộc khi thêm 1 thư viện mới vào project( mà bạn có thể bỏ lỡ trong buổi Code Review).
 
@@ -41,7 +41,7 @@ Trong trường hợp có 2 thư viện với các yêu cầu  mâu thuẫn nhau
 
 Nếu bạn đang tạo 1 project, bạn  chắc chắn muốn commit composer.lock lên git.  Điều này sẽ đảm bảo tất cả mọi người - cả bạn, đồng nghiệp của bạn, server CI của bạn và server product của bạn - đang chạy ứng dụng với cùng các phiên bản phụ thuộc.
 
-Thoạt nhìn, điều này nghe có vẻ vô dụng - bạn đã  sử dụng 1 phiên bản cụ thể theo những ràng buộc được đề cập trong lời khuyên #3. Nhưng không, cũng có những phụ thuộc trong những phụ thuộc của bạn  lại không bị hạn chế bởi những ràng buộc này (ví dụ symfony/console phụ thuộc vào symfony/polyfill-mbstring). Vì vậy nếu không commit file composer.lock, bạn sẽ không  thể lấy được những tập phụ thuộc giống nhau.
+Thoạt nhìn, điều này nghe có vẻ không cần thiết - bạn đã  sử dụng 1 phiên bản cụ thể theo những ràng buộc được đề cập trong lời khuyên #3. Nhưng không, cũng có những phụ thuộc trong những phụ thuộc của bạn  lại không bị hạn chế bởi những ràng buộc này (ví dụ symfony/console phụ thuộc vào symfony/polyfill-mbstring). Vì vậy nếu không commit file composer.lock, bạn sẽ không  thể lấy được những tập phụ thuộc giống nhau.
 
 ### Lời khuyên #6: Để file composer.lock trong .gitignore ở các thư viện.
 Nếu bạn đang tạo 1 thư viện (hãy gọi nó là acme/my-library), bạn không nên commit file composer.lock. Nó chả giúp ích được gì cho các project sử dụng thư viện của bạn đâu.
@@ -85,9 +85,7 @@ Bạn có thể xem nó cụ thể hơn trong thư viên mhujer/fio-api-php củ
 Mặc dù giải pháp này sẽ  khắc phục được hầu hết các vấn đề không tương thích, nhưng hãy nhớ rằng có nhiều sự kết hợp  trong các phụ thuộc giữa những phiên bản thấp nhất và cao nhất. Và điều này có cũng có thể trở nên không tương thích.
 
 ### Tip #8: Sắp xếp các packages khai báo trong require và require-dev theo tên
-Sort packages in require and require-dev by name
-It is a good practice to keep packages in require and require-dev sorted by name. It can prevent unnecessary merge conflicts when rebasing a branch. Because if you have added a package to the end of the list in two branches, there would be a merge conflict every time.
-Việc sắp xếp các package trong mục require và require-dev sẽ rất có lợi. Nó có thể  tránh xung đột khi gộp không cần thiết khi tiến hành rebase 1 nhánh. Bởi vì nếu bạn thêm 1 package vào cuối danh sách trong 2 nhánh, sẽ luôn có những xung đột khi gộp.
+Một thói quen tốt là sắp xếp các package trong require vàrequire-dev theo tên. Nó có thể  tránh xung đột khi gộp không cần thiết khi tiến hành rebase 1 nhánh. Bởi vì nếu bạn thêm 1 package vào cuối danh sách trong 2 nhánh, sẽ luôn có những xung đột khi gộp.
 
 Đây là việc buồn chán khi thực hiện bằng tay, vì vậy  đây là cách tốt nhất để cấu hình trong composer.json
 {
@@ -125,7 +123,7 @@ T đoán rằng chúng ta đều đồng ý 1 sự thật rằng các phụ thu�
 
 Bạn có thể sử dụng câu lệnh composer oudated để xem các phụ thuộc có thể được cập nhật. Bạn nến thêm lựa chọn --direct (hay -D) để chỉ hiển thị danh sách các phụ thuộc được khai báo trong composer.json. Ngoài ra còn có lựa chọn -m để chỉ hiển thị các bản cập nhật ở mức nhỏ(minor-y)
 
-Với mỗi phụ thuộc quá hạn thì thực  hiện các bước sau đây:
+Với mỗi phụ thuộc đã bị lỗi thời, hãy làm theo các bước sau :
 
 - Tạo 1 nhánh mới
 - Cập nhật phiên bản phụ thuộc trong composer.json lên phiên bản cuối cùng.
